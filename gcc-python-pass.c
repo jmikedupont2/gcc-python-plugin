@@ -21,12 +21,7 @@
 #include "gcc-python.h"
 #include "gcc-python-wrappers.h"
 #include "diagnostic.h"
-#include "gcc-c-api/gcc-function.h"
-#include "gcc-c-api/gcc-location.h"
-#if (GCC_VERSION >= 4009)
-#include "context.h"
-#include "pass_manager.h"
-#endif
+
 
 /*
   Wrapper for GCC's (opt_pass *)
@@ -209,17 +204,17 @@ public:
   opt_pass *clone() {return this; }
 };
 
-class PyGccRtlPass : public rtl_opt_pass
-{
-public:
-  PyGccRtlPass (const pass_data& data, gcc::context *ctxt)
-    : rtl_opt_pass (data, ctxt)
-  {
-  }
+/* class PyGccRtlPass : public rtl_opt_pass */
+/* { */
+/* public: */
+/*   PyGccRtlPass (const pass_data& data, gcc::context *ctxt) */
+/*     : rtl_opt_pass (data, ctxt) */
+/*   { */
+/*   } */
 
-  PASS_DECLARE_GATE_AND_EXECUTE
-  opt_pass *clone() {return this; }
-};
+/*   PASS_DECLARE_GATE_AND_EXECUTE */
+/*   opt_pass *clone() {return this; } */
+/* }; */
 
 class PyGccIpaPass : public ipa_opt_pass_d
 {
@@ -304,9 +299,9 @@ do_pass_init(PyObject *s, PyObject *args, PyObject *kwargs,
       case GIMPLE_PASS:
           pass = new PyGccGimplePass (pass_data, g);
           break;
-      case RTL_PASS:
-          pass = new PyGccRtlPass (pass_data, g);
-          break;
+          //      case RTL_PASS:
+          //          pass = new PyGccRtlPass (pass_data, g);
+          //break;
       case SIMPLE_IPA_PASS:
           pass = new PyGccSimpleIpaPass (pass_data, g);
           break;
@@ -356,13 +351,13 @@ PyGccGimplePass_init(PyObject *self, PyObject *args, PyObject *kwds)
                         sizeof(struct gimple_opt_pass));
 }
 
-int
-PyGccRtlPass_init(PyObject *self, PyObject *args, PyObject *kwds)
-{
-    return do_pass_init(self, args, kwds,
-                        RTL_PASS,
-                        sizeof(struct rtl_opt_pass));
-}
+//int
+//PyGccRtlPass_init(PyObject *self, PyObject *args, PyObject *kwds)
+//{
+//    return do_pass_init(self, args, kwds,
+//                        RTL_PASS,
+//                        sizeof(struct rtl_opt_pass));
+//}
 
 int
 PyGccSimpleIpaPass_init(PyObject *self, PyObject *args, PyObject *kwds)
@@ -649,8 +644,8 @@ get_type_for_pass_type(enum opt_pass_type pt)
     case GIMPLE_PASS:
         return &PyGccGimplePass_TypeObj;
 
-    case RTL_PASS:
-        return &PyGccRtlPass_TypeObj;
+        //    case RTL_PASS:
+        //        return &PyGccRtlPass_TypeObj;
 
     case SIMPLE_IPA_PASS:
         return &PyGccSimpleIpaPass_TypeObj;

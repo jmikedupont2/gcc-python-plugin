@@ -432,8 +432,7 @@ PyGccOption_is_enabled(PyGccOption * self, void *closure);
 int
 PyGccGimplePass_init(PyObject *self, PyObject *args, PyObject *kwds);
 
-int
-PyGccRtlPass_init(PyObject *self, PyObject *args, PyObject *kwds);
+//int PyGccRtlPass_init(PyObject *self, PyObject *args, PyObject *kwds);
 
 int
 PyGccSimpleIpaPass_init(PyObject *self, PyObject *args, PyObject *kwds);

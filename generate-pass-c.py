@@ -98,7 +98,8 @@ def generate_pass():
                           tp_repr = '(reprfunc)PyGccPass_repr',
                           tp_str = '(reprfunc)PyGccPass_repr',
                           tp_methods = methods.identifier,
-                          tp_flags = '(Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE)',
+                                    #                        tp_flags = '(Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE)',
+                                    tp_flags = 'Py_TPFLAGS_BASETYPE',
                           )
     cu.add_defn(pytype.c_defn())
     modinit_preinit += pytype.c_invoke_type_ready()

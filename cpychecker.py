@@ -15,5 +15,11 @@
 #   along with this program.  If not, see
 #   <http://www.gnu.org/licenses/>.
 
-from libcpychecker import main
-main()
+import sys
+sys.path.append("/testing/gccpy/")
+
+import python_example
+import pdb
+pdb.settrace()
+#from libcpychecker import main
+#main()

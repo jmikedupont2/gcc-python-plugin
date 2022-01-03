@@ -223,9 +223,9 @@ PyGcc_CallbackFor_PLUGIN_PASS_EXECUTION(void *gcc_data, void *user_data)
 
     gstate = PyGILState_Ensure();
 
-    PyGcc_FinishInvokingCallback(gstate, 
-					1, PyGccPass_New(pass),
-					user_data);
+    //PyGcc_FinishInvokingCallback(gstate, 
+    //				1, PyGccPass_New(pass),
+    //					user_data);
 }
 
 static void

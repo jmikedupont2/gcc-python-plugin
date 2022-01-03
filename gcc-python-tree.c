@@ -179,9 +179,9 @@ PyGccTree_str(struct PyGccTree * self)
 long
 PyGccTree_hash(struct PyGccTree * self)
 {
-    if (Py_TYPE(self) == (PyTypeObject*)&PyGccComponentRef_TypeObj) {
-        return (long)TREE_OPERAND(self->t.inner, 0) ^ (long)TREE_OPERAND(self->t.inner, 1);
-    }
+    //if (Py_TYPE(self) == (PyTypeObject*)&PyGccComponentRef_TypeObj) {
+    //    return (long)TREE_OPERAND(self->t.inner, 0) ^ (long)TREE_OPERAND(self->t.inner, 1);
+    //}
 
     if (Py_TYPE(self) == (PyTypeObject*)&PyGccIntegerCst_TypeObj) {
         /* Ensure that hash(cst) == hash(int(cst)) */
@@ -236,27 +236,27 @@ PyGccTree_richcompare(PyObject *o1, PyObject *o2, int op)
     treeobj1 = (struct PyGccTree *)o1;
     treeobj2 = (struct PyGccTree *)o2;
 
-    if (Py_TYPE(o1) == (PyTypeObject*)&PyGccComponentRef_TypeObj) {
-        if (Py_TYPE(o2) == (PyTypeObject*)&PyGccComponentRef_TypeObj) {
-            switch (op) {
-            case Py_EQ:
-                cond = ((TREE_OPERAND(treeobj1->t.inner, 0) == TREE_OPERAND(treeobj2->t.inner, 0)) &&
-                        (TREE_OPERAND(treeobj1->t.inner, 1) == TREE_OPERAND(treeobj2->t.inner, 1)));
-                break;
+    //if (Py_TYPE(o1) == (PyTypeObject*)&PyGccComponentRef_TypeObj/* ) { */
+    /*     if (Py_TYPE(o2) == (PyTypeObject*)&PyGccComponentRef_TypeObj) { */
+    /*         switch (op) { */
+    /*         case Py_EQ: */
+    /*             cond = ((TREE_OPERAND(treeobj1->t.inner, 0) == TREE_OPERAND(treeobj2->t.inner, 0)) && */
+    /*                     (TREE_OPERAND(treeobj1->t.inner, 1) == TREE_OPERAND(treeobj2->t.inner, 1))); */
+    /*             break; */
 
-            case Py_NE:
-                cond = !((TREE_OPERAND(treeobj1->t.inner, 0) == TREE_OPERAND(treeobj2->t.inner, 0)) &&
-                         (TREE_OPERAND(treeobj1->t.inner, 1) == TREE_OPERAND(treeobj2->t.inner, 1)));
-                break;
+    /*         case Py_NE: */
+    /*             cond = !((TREE_OPERAND(treeobj1->t.inner, 0) == TREE_OPERAND(treeobj2->t.inner, 0)) && */
+    /*                      (TREE_OPERAND(treeobj1->t.inner, 1) == TREE_OPERAND(treeobj2->t.inner, 1))); */
+    /*             break; */
 
-            default:
-                result_obj = Py_NotImplemented;
-                goto out;
-            }
-            result_obj = cond ? Py_True : Py_False;
-            goto out;
-        }
-    }
+    /*         default: */
+    /*             result_obj = Py_NotImplemented; */
+    /*             goto out; */
+    /*         } */
+    /*         result_obj = cond ? Py_True : Py_False; */
+    /*         goto out; */
+    /*     } */
+    /* } */
 
     switch (op) {
     case Py_EQ:

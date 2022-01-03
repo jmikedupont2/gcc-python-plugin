@@ -43,6 +43,9 @@ class CpyCheckerGimplePass(gcc.GimplePass):
                  dump_json=False,
                  verbose=False):
         gcc.GimplePass.__init__(self, 'cpychecker-gimple')
+        print(dump_traces)
+        import pdb
+        pdb.set_trace()
         self.dump_traces = dump_traces
         self.show_traces = show_traces
         self.verify_pyargs = verify_pyargs
